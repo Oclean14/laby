@@ -1,5 +1,8 @@
 package laby.maze;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cell {
 	
 	private boolean[] edges = new boolean[4];
@@ -7,6 +10,8 @@ public class Cell {
 	public final static int CELL_TOP = 1;
 	public final static int CELL_RIGHT = 2;
 	public final static int CELL_BOTTOM = 3;
+	// The cell is visited or not
+	private boolean isVisited = false;
 	
 	public Cell(boolean edgeLeft, boolean edgeTop, boolean edgeRight, boolean edgeBottom){
 		this.edges[CELL_LEFT] = edgeLeft;
@@ -49,7 +54,15 @@ public class Cell {
 		return this.edges[CELL_BOTTOM];
 	}
 	
-	public void openWall(int side){
+	public void openWall(final int side){
 		this.edges[side] = true;
+	}
+	
+	public void setVisited(final boolean isVisited){
+		this.isVisited = isVisited;
+	}
+	
+	public boolean getVisited(){
+		return this.isVisited;
 	}
 }

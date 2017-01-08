@@ -31,15 +31,19 @@ public class Maze {
 			/* Building the maze if the size is correct 
 			 * Initializing the cells
 			 * */
-			for(int i=0; i< size; ++i){
-				maze[i] = new Cell[size];
-			}
+			init(size);
 			dfs();
 		}
 	}
 	
+	private void init(int size){
+		for(int i=0; i< size; ++i){
+			maze[i] = new Cell[size];
+		}
+	}
+	
 	/**
-	 * Depth first search algorithm implementation
+	 * Depth first search algorithm implementation to generate random maze
 	 */
 	private void dfs(){
 		
