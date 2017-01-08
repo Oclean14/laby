@@ -2,7 +2,7 @@ package laby.maze;
 
 public class Cell {
 	
-	private boolean[] edges;
+	private boolean[] edges = new boolean[4];
 	public final static int CELL_LEFT = 0;
 	public final static int CELL_TOP = 1;
 	public final static int CELL_RIGHT = 2;
