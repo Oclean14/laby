@@ -1,4 +1,4 @@
-package project;
+package laby;
 
 public class Resolution {
 
