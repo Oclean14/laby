@@ -1,9 +1,8 @@
 package laby.maze;
 
-import java.util.ArrayList;
-import java.util.List;
+import laby.maze.objects.MazeObject;
 
-public class Cell {
+public class Cell extends MazeObject{
 	
 	private boolean[] edges = new boolean[4];
 	public final static int CELL_LEFT = 0;
@@ -13,30 +12,23 @@ public class Cell {
 	// The cell is visited or not
 	private boolean isVisited = false;
 	
-	public Cell(boolean edgeLeft, boolean edgeTop, boolean edgeRight, boolean edgeBottom){
-		this.edges[CELL_LEFT] = edgeLeft;
-		this.edges[CELL_TOP] = edgeTop;
-		this.edges[CELL_RIGHT] = edgeRight;
-		this.edges[CELL_BOTTOM] = edgeBottom;
-	}
-	
-	public Cell(boolean[] edges){
-		this.edges = edges;
+	public Cell(Maze maze, int col, int row, int width, int height){
+		super(maze, col, row, width, height);
+		this.edges[CELL_LEFT] = false;
+		this.edges[CELL_TOP] = false;
+		this.edges[CELL_RIGHT] = false;
+		this.edges[CELL_BOTTOM] = false;
 	}
 	
 	public Cell(Cell cell){
+		super(cell);
 		this.edges[CELL_LEFT] = getLeftEdge();
 		this.edges[CELL_TOP] = getTopEdge();
 		this.edges[CELL_RIGHT] = getRightEdge();
 		this.edges[CELL_BOTTOM] = getBottomEdge();
 	}
 	
-	public Cell(){
-		this.edges[CELL_LEFT] = false;
-		this.edges[CELL_TOP] = false;
-		this.edges[CELL_RIGHT] = false;
-		this.edges[CELL_BOTTOM] = false;
-	}
+
 	
 	public boolean getLeftEdge(){
 		return this.edges[CELL_LEFT];
