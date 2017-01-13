@@ -9,6 +9,7 @@ import laby.*;
 public class Cell extends MazeObject{
 	
 	private boolean[] edges = new boolean[4];
+	private boolean[] exploitability = new boolean[4];
 	public final static int CELL_LEFT = 0;
 	public final static int CELL_TOP = 1;
 	public final static int CELL_RIGHT = 2;
@@ -22,7 +23,11 @@ public class Cell extends MazeObject{
 		this.edges[CELL_TOP] = true;
 		this.edges[CELL_RIGHT] = true;
 		this.edges[CELL_BOTTOM] = true;
-		draw();
+		this.exploitability[CELL_LEFT] = false;
+		this.exploitability[CELL_RIGHT] = false;
+		this.exploitability[CELL_TOP] = false;
+		this.exploitability[CELL_BOTTOM] = false;
+ 		draw();
 	}
 	
 	public Cell(Cell cell){
@@ -31,6 +36,10 @@ public class Cell extends MazeObject{
 		this.edges[CELL_TOP] = getTopEdge();
 		this.edges[CELL_RIGHT] = getRightEdge();
 		this.edges[CELL_BOTTOM] = getBottomEdge();
+		this.exploitability[CELL_LEFT] = getLeftExploitability();
+		this.exploitability[CELL_RIGHT] = getRightExploitability();
+		this.exploitability[CELL_TOP] = getTopExploitability();
+		this.exploitability[CELL_BOTTOM] = getBottomExploitability();
 		draw();
 	}
 	
@@ -50,6 +59,38 @@ public class Cell extends MazeObject{
 	
 	public boolean getBottomEdge(){
 		return this.edges[CELL_BOTTOM];
+	}
+	
+	public boolean getLeftExploitability(){
+		return this.exploitability[CELL_LEFT];
+	}
+	
+	public void setLeftExploitability(boolean  exploitability){
+		this.exploitability[CELL_LEFT] = exploitability;
+	}
+	
+	public void setRightExploitability(boolean  exploitability){
+		this.exploitability[CELL_RIGHT] = exploitability;
+	}
+	
+	public void setTopExploitability(boolean  exploitability){
+		this.exploitability[CELL_TOP] = exploitability;
+	}
+	
+	public void setBottomExploitability(boolean  exploitability){
+		this.exploitability[CELL_BOTTOM] = exploitability;
+	}
+	
+	public boolean getRightExploitability(){
+		return this.exploitability[CELL_RIGHT];
+	}
+	
+	public boolean getTopExploitability(){
+		return this.exploitability[CELL_TOP];
+	}
+	
+	public boolean getBottomExploitability(){
+		return this.exploitability[CELL_BOTTOM];
 	}
 	
 	public void openWall(final int side){

@@ -30,7 +30,6 @@ public class Mouse extends MazeObject implements IMoveable{
 			Cell cell1 = this.maze.getCell(col - 1, row);
 			cell1.setVisited(true);
 			addCellToPath(cell1);
-			
 			col -= 1;
 			return true;
 		} 
@@ -40,9 +39,9 @@ public class Mouse extends MazeObject implements IMoveable{
 			currentCell.setVisited(true);
 			
 			Cell cell1 = this.maze.getCell(col + 1, row);
+			
 			cell1.setVisited(true);
 			addCellToPath(cell1);
-			
 			col -= 1;
 			return true;
 		}
@@ -52,9 +51,9 @@ public class Mouse extends MazeObject implements IMoveable{
 			currentCell.setVisited(true);
 			
 			Cell cell1 = this.maze.getCell(col, row + 1);
+			
 			cell1.setVisited(true);
 			addCellToPath(cell1);
-			
 			col -= 1;
 			return true;
 		}
@@ -64,22 +63,30 @@ public class Mouse extends MazeObject implements IMoveable{
 			currentCell.setVisited(true);
 			
 			Cell cell1 = this.maze.getCell(col, row - 1);
+			
 			cell1.setVisited(true);
 			addCellToPath(cell1);
-			
 			col -= 1;
 			return true;
+			
 		}	
 		
 	
 		return false;	
 		
 	}
+	
+	public boolean isExploitable () {
+		Cell cell = this.maze.getCell(col, row);
+		if (cell.getLeftExploitability() | cell.getBottomExploitability() |  cell.getRightExploitability() | cell.getTopExploitability()){
+			return true;
+		}
+		return false;
+	}
 
 	private void addCellToPath(Cell cell) {
 		// TODO Auto-generated method stub
 		path.add(cell);
-		
 	}
 
 	@Override
@@ -87,8 +94,11 @@ public class Mouse extends MazeObject implements IMoveable{
 		// TODO Auto-generated method stub
 		Cell cell = this.maze.getCell(col, row);
 		if(cell.getLeftEdge()){
-			return true;
+			Cell cell1 = this.maze.getCell(col - 1, row);
+			if (!cell1.getVisited()){
+			return true; 
 		}
+			}
 		return false;
 	}
 
@@ -97,7 +107,10 @@ public class Mouse extends MazeObject implements IMoveable{
 		// TODO Auto-generated method stub
 		Cell cell = this.maze.getCell(col, row);
 		if(cell.getRightEdge()){
+			Cell cell1 = this.maze.getCell(col + 1, row);
+			if (!cell1.getVisited()){
 			return true;
+			}
 		}
 		return false;
 	}
@@ -107,7 +120,10 @@ public class Mouse extends MazeObject implements IMoveable{
 		// TODO Auto-generated method stub
 		Cell cell = this.maze.getCell(col, row);
 		if(cell.getTopEdge()){
+			Cell cell1 = this.maze.getCell(col, row + 1);
+			if (!cell1.getVisited()){
 			return true;
+			}
 		}
 		return false;
 	}
@@ -117,9 +133,71 @@ public class Mouse extends MazeObject implements IMoveable{
 		// TODO Auto-generated method stub
 		Cell cell = this.maze.getCell(col, row);
 		if(cell.getBottomEdge()){
+			Cell cell1 = this.maze.getCell(col, row - 1);
+			if (!cell1.getVisited()){
 			return true;
+			}
 		}
 		return false;
+	}
+	
+	public void definingExploitibility(String edge){
+		Cell cell = this.maze.getCell(col, row);
+		switch(edge){
+		case "LEFT":
+			if(canMoveRight())
+			{
+				cell.setRightExploitability(true);
+			}
+			if(canMoveUp()){
+				cell.setTopExploitability(true);
+			}
+			if(canMoveDown()){
+				cell.setBottomExploitability(true);
+			}
+		case "RIGHT":
+			if(canMoveLeft())
+			{
+				cell.setLeftExploitability(true);
+			}
+			if(canMoveUp()){
+				cell.setTopExploitability(true);
+			}
+			if(canMoveDown()){
+				cell.setBottomExploitability(true);
+			}
+		case "TOP":
+			if(canMoveRight())
+			{
+				cell.setRightExploitability(true);
+			}
+			if(canMoveLeft()){
+				cell.setLeftExploitability(true);
+			}
+			if(canMoveDown()){
+				cell.setBottomExploitability(true);
+			}
+		case "BOTTOM":
+			if(canMoveRight())
+			{
+				cell.setRightExploitability(true);
+			}
+			if(canMoveUp()){
+				cell.setTopExploitability(true);
+			}
+			if(canMoveLeft()){
+				cell.setLeftExploitability(true);
+			}
+			break;
+	}
+	
+	}
+
+	public void backTracking(){
+		
+		// Pop le dernier noeud deja teste
+		path.pop();
+	
 	}
 
 }
