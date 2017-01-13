@@ -27,8 +27,6 @@ public class Maze {
 	private void buildMaze(int size, int cellSize) throws BuildingMazeException{
 		if(size < SIZE_MIN_LIMIT){
 			throw new BuildingMazeException("The size must be greater than " + SIZE_MIN_LIMIT);
-		}else if(size % 2 == 0){
-			throw new BuildingMazeException("The size must be an odd number to generate the maze");
 		}
 		else{
 			/* Building the maze if the size is correct 
@@ -38,7 +36,6 @@ public class Maze {
 			this.cellSize = cellSize;
 			
 			init(size);
-			//dfs();
 		}
 	}
 	

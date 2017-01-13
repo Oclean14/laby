@@ -13,7 +13,7 @@ public class DfsAlgorithmGenerateMaze implements IAlgorithm{
 		System.out.println("Executing DFS Algorithm");
 		Cursor cursor = (Cursor) obj;
 		// Pick up a random cell and set the visited attribute to true
-		Cell startingCell = maze.pickRandomCell();
+		Cell startingCell = maze.getCell(0, 0);
 		startingCell.setVisited(true);
 		
 		// Initialize the cursor position on the maze and size
@@ -24,9 +24,9 @@ public class DfsAlgorithmGenerateMaze implements IAlgorithm{
 		
 		cursor.addCellToPath(startingCell);
 		cursor.initPossibleDirections();
-
+		int dir = cursor.getRandomPossibleDirection();
 		while(!cursor.getPath().isEmpty()){
-			int dir = cursor.getRandomPossibleDirection();
+			dir = cursor.getRandomPossibleDirection();
 			System.out.println("random direction " + dir);
 			cursor.setDirection(dir);
 			boolean retVal = cursor.move();
@@ -37,7 +37,6 @@ public class DfsAlgorithmGenerateMaze implements IAlgorithm{
 				}
 				else{
 					cursor.deletePossibleDirection(dir);
-					dir = cursor.getRandomPossibleDirection();
 				}
 			}
 		}

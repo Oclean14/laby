@@ -11,11 +11,11 @@ import laby.maze.objects.interfaces.IMoveable;
 public class Cursor extends MazeObject implements IMoveable{
 	
 	ArrayDeque<Cell> path = new ArrayDeque<Cell>();
-    public static int NO_DIRECTION_AVAILABLE = -1;
-	private final static int WEST = 0;
-	private final static int NORTH = 1;
-	private final static int EAST = 2;
-	private final static int SOUTH = 3;
+    public final static int NO_DIRECTION_AVAILABLE = -1;
+	private final static int WEST = Cell.CELL_LEFT;
+	private final static int NORTH = Cell.CELL_TOP;
+	private final static int EAST = Cell.CELL_RIGHT;
+	private final static int SOUTH = Cell.CELL_BOTTOM;
 	private ArrayList<Integer> possibleDirections = new ArrayList<Integer>();
 	private int direction = WEST;
 
@@ -43,7 +43,7 @@ public class Cursor extends MazeObject implements IMoveable{
 					cell1.openWall(Cell.CELL_RIGHT);
 					addCellToPath(cell1);
 					col -= 1;
-					return true;
+					return true;	
 				}
 				return false;
 			case NORTH:
@@ -181,7 +181,7 @@ public class Cursor extends MazeObject implements IMoveable{
 	public void backTracking(){
 		
 		// Pop le dernier noeud deja teste
-		path.pop();
+		//path.pop();
 		boolean foundDirection = false;
 		while(!path.isEmpty() && !foundDirection){
 			initPossibleDirections();
