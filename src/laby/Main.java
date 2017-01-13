@@ -19,7 +19,7 @@ public class Main {
 		StdDraw.setCanvasSize(WINDOW_SIZE, WINDOW_SIZE);
         
 		Maze labyrinthe = new Maze(NUMBER_OF_CELLS, CELL_SIZE);
-		// Generate laby
+		//Generate laby
 		Cursor cursor = new Cursor(labyrinthe, 25 ,25, CELL_SIZE, CELL_SIZE);
 		cursor.setAlgorithm(new DfsAlgorithmGenerateMaze());
 	}
