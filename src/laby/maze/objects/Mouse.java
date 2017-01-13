@@ -31,6 +31,7 @@ public class Mouse extends MazeObject implements IMoveable{
 			cell1.setVisited(true);
 			addCellToPath(cell1);
 			col -= 1;
+			definingExploitibility("LEFT");
 			return true;
 		} 
 		
@@ -43,6 +44,7 @@ public class Mouse extends MazeObject implements IMoveable{
 			cell1.setVisited(true);
 			addCellToPath(cell1);
 			col -= 1;
+			definingExploitibility("RIGHT");
 			return true;
 		}
 		
@@ -55,6 +57,7 @@ public class Mouse extends MazeObject implements IMoveable{
 			cell1.setVisited(true);
 			addCellToPath(cell1);
 			col -= 1;
+			definingExploitibility("TOP");
 			return true;
 		}
 			
@@ -67,6 +70,7 @@ public class Mouse extends MazeObject implements IMoveable{
 			cell1.setVisited(true);
 			addCellToPath(cell1);
 			col -= 1;
+			definingExploitibility("BOTTOM");
 			return true;
 			
 		}	
@@ -76,8 +80,7 @@ public class Mouse extends MazeObject implements IMoveable{
 		
 	}
 	
-	public boolean isExploitable () {
-		Cell cell = this.maze.getCell(col, row);
+	public boolean isExploitable (Cell cell) {
 		if (cell.getLeftExploitability() | cell.getBottomExploitability() |  cell.getRightExploitability() | cell.getTopExploitability()){
 			return true;
 		}
@@ -196,8 +199,14 @@ public class Mouse extends MazeObject implements IMoveable{
 	public void backTracking(){
 		
 		// Pop le dernier noeud deja teste
-		path.pop();
-	
+		Cell upperCell = path.pop();
+		
+		while (!isExploitable(upperCell)){
+			// Supprimer le dernier noed de la pile
+			path.poll();
+			// On récupère le dernier noeud de la nouvelle pile
+			upperCell = path.pop();
+		}
 	}
 
 }
