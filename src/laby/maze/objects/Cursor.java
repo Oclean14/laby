@@ -2,6 +2,7 @@ package laby.maze.objects;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import laby.maze.Cell;
 import laby.maze.Maze;
@@ -162,7 +163,7 @@ public class Cursor extends MazeObject implements IMoveable{
 	
 	public int getRandomPossibleDirection(){
 		if(possibleDirections.size() > 1){
-			int randInt = ((int)Math.random() * possibleDirections.size());
+			int randInt = ThreadLocalRandom.current().nextInt(0, possibleDirections.size());
 			int dir = possibleDirections.get(randInt);
 			return dir;
 		}else if(possibleDirections.size() == 1){
@@ -178,10 +179,9 @@ public class Cursor extends MazeObject implements IMoveable{
 	}
 	
 	public void backTracking(){
-		System.out.println("Cursor back tracking now");
-		// Pop le dernier noeud deja teste
-		//path.pop();
 		
+		// Pop le dernier noeud deja teste
+		path.pop();
 		boolean foundDirection = false;
 		while(!path.isEmpty() && !foundDirection){
 			initPossibleDirections();

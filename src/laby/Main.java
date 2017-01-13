@@ -7,7 +7,7 @@ import laby.maze.objects.Cursor;
 
 public class Main {
 	public final static int CELL_SIZE = 20;
-	public final static int NUMBER_OF_CELLS = 51;
+	public final static int NUMBER_OF_CELLS = 21;
 	public final static int WINDOW_SIZE = CELL_SIZE*NUMBER_OF_CELLS;
 	
 	public static void main(String[] args) {

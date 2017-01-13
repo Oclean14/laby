@@ -32,6 +32,7 @@ public class DfsAlgorithmGenerateMaze implements IAlgorithm{
 			boolean retVal = cursor.move();
 			if(!retVal){
 				if(dir == Cursor.NO_DIRECTION_AVAILABLE){
+					System.out.println("Cursor back tracking now. No possible directions " + cursor.getRandomPossibleDirection() );
 					cursor.backTracking();
 				}
 				else{
