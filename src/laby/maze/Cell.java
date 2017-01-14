@@ -110,25 +110,26 @@ public class Cell extends MazeObject{
 	
 	public void draw(){
 		//StdDraw.clear();
-		Color color = StdDraw.BLACK;
 		StdDraw.setPenRadius(0.01);
+		Color color = StdDraw.BLACK;
 		
 		// TOP EDGE
-		color = (this.getBottomEdge()) ? StdDraw.MAGENTA : StdDraw.WHITE;
+		color = (this.getBottomEdge()) ? StdDraw.BLACK: StdDraw.WHITE;
 		StdDraw.setPenColor(color);
 		StdDraw.line(col * this.getRealWidth() , row * this.getRealHeight(), col * getRealWidth() + getRealWidth(), row*getRealHeight());
+		
 	    //RIGHT EDGE
-		color = (this.getLeftEdge()) ? StdDraw.GRAY : StdDraw.WHITE;
+		color = (this.getLeftEdge()) ? StdDraw.BLACK : StdDraw.WHITE;
 		StdDraw.setPenColor(color);
 		StdDraw.line(col * this.getRealWidth() +  this.getRealWidth(), row * this.getRealHeight(), col * getRealWidth() + this.getRealWidth(), row*getRealHeight() - getRealHeight());
 		
 	    //BOTTOM EDGE
-		color = (this.getTopEdge()) ? StdDraw.RED : StdDraw.WHITE;
+		color = (this.getTopEdge()) ? StdDraw.BLACK : StdDraw.WHITE;
 		StdDraw.setPenColor(color);
 		StdDraw.line(col * this.getRealWidth() , row * this.getRealHeight() - getRealHeight(), col * getRealWidth() + getRealWidth(), row*getRealHeight() - getRealHeight());
 
 	    //LEFT EDGE
-		color = (this.getRightEdge()) ? StdDraw.BLUE : StdDraw.WHITE;
+		color = (this.getRightEdge()) ? StdDraw.BLACK : StdDraw.WHITE;
 		StdDraw.setPenColor(color);
 		StdDraw.line(col * this.getRealWidth(), row * this.getRealHeight(), col * this.getRealWidth(), row*getRealHeight() - getRealHeight());
 

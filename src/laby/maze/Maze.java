@@ -1,5 +1,8 @@
 package laby.maze;
 
+import java.awt.Color;
+
+import edu.princeton.cs.introcs.StdDraw;
 import laby.maze.exceptions.BuildingMazeException;
 
 public class Maze {

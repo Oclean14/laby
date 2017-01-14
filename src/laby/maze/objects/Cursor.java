@@ -12,10 +12,10 @@ public class Cursor extends MazeObject implements IMoveable{
 	
 	ArrayDeque<Cell> path = new ArrayDeque<Cell>();
     public final static int NO_DIRECTION_AVAILABLE = -1;
-	private final static int WEST = Cell.CELL_LEFT;
-	private final static int NORTH = Cell.CELL_TOP;
-	private final static int EAST = Cell.CELL_RIGHT;
-	private final static int SOUTH = Cell.CELL_BOTTOM;
+	public final static int WEST = Cell.CELL_LEFT;
+	public final static int NORTH = Cell.CELL_TOP;
+	public final static int EAST = Cell.CELL_RIGHT;
+	public final static int SOUTH = Cell.CELL_BOTTOM;
 	private ArrayList<Integer> possibleDirections = new ArrayList<Integer>();
 	private int direction = WEST;
 
@@ -45,6 +45,7 @@ public class Cursor extends MazeObject implements IMoveable{
 					col -= 1;
 					return true;	
 				}
+				deletePossibleDirection(WEST);
 				return false;
 			case NORTH:
 				System.out.println("Cursor move up");
@@ -59,6 +60,7 @@ public class Cursor extends MazeObject implements IMoveable{
 					row += 1;
 					return true;
 				}
+				deletePossibleDirection(NORTH);
 				return false;
 			case EAST:
 				if(canMoveRight())
@@ -68,11 +70,12 @@ public class Cursor extends MazeObject implements IMoveable{
 					currentCell.setVisited(true);
 					cell1.setVisited(true);
 					currentCell.openWall(Cell.CELL_RIGHT);
-					cell1.openWall(Cell.CELL_LEFT);
+					cell1.openWall(Cell.CELL_LEFT	);
 					addCellToPath(cell1);
 					col += 1;
 					return true;
 				}
+				deletePossibleDirection(EAST);
 				return false;
 			
 			case SOUTH:
@@ -88,8 +91,9 @@ public class Cursor extends MazeObject implements IMoveable{
 					row -= 1;
 					return true;
 				}
-				break;
-		}
+				deletePossibleDirection(SOUTH);
+				return false;
+				}
 		return false;
 
 	}
@@ -179,51 +183,26 @@ public class Cursor extends MazeObject implements IMoveable{
 	}
 	
 	public void backTracking(){
-		
-		// Pop le dernier noeud deja teste
-		//path.pop();
 		boolean foundDirection = false;
+		
 		while(!path.isEmpty() && !foundDirection){
 			initPossibleDirections();
 			Cell upperCell = path.pop();
 			col = upperCell.col;
 			row = upperCell.row;
-
+			
 			while(!possibleDirections.isEmpty()){
 				int dir = getRandomPossibleDirection();
 				this.setDirection(dir);
 				boolean retVal = this.move();
 				
-				String dirName = "";
-				
-				switch(dir){
-				case WEST:
-					dirName = "WEST";
-					break;
-				case NORTH:
-					dirName = "NORTH";
-					break;
-				case EAST:
-					dirName = "EAST";
-					break;
-				case SOUTH:
-					dirName = "SOUTH";
-					break;
-				}
-				
 				if(retVal) {
-					System.out.println("Change direction to " + dirName);
 					foundDirection = true;
 					path.push(upperCell);
 					break;
 				}
-				else{
-					System.out.println("Impossible to go to this direction " + dirName);
-					deletePossibleDirection(dir);
-				}
 			}
 		}
-		initPossibleDirections();
 	}
 	
 }
